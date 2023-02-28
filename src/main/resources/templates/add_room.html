@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dashboard}">
+<head>
+
+</head>
+<body>
+<br/>
+<br/>
+<br/>
+<div class = "container" layout:fragment="content">
+    <br/>
+    <br/>
+
+    <div class = "row">
+        <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1><b>THÊM PHÒNG </b> </h1>
+            <div class ="card-body">
+                <form th:action="@{/rooms/add}" th:object="${room}" method ="POST" >
+                    <div th:if="${param.error_exist}">
+                        <div class = "alert alert-danger"> Phòng đã tồn tại </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label >Tên phòng</label>
+                            <input
+                                    type="text"
+                                    name="name"
+                                    th:field="*{name}"
+                                    class="form-control"
+                                    placeholder="Nhập tên phòng"
+                            />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label >Giá phòng</label>
+                            <input
+                                    type="text"
+                                    name="price"
+                                    th:number="*{price}"
+                                    class="form-control"
+                                    placeholder="Nhập giá phòng"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label> Mô tả</label>
+                            <input
+                                    type="text"
+                                    name="description"
+                                    th:field="*{description}"
+                                    class="form-control"
+                                    placeholder="thêm mô tả"
+                            />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label> Diện tích </label>
+                            <input
+                                    type="text"
+                                    name="square"
+                                    th:number="*{square}"
+                                    class="form-control"
+                                    placeholder="Diện tích phòng"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label> Đơn giá điện</label>
+                            <input
+                                    type="text"
+                                    name="elecUnit"
+                                    th:number="*{elecUnit}"
+                                    class="form-control"
+                                    placeholder="Nhập đơn giá điện "
+                            />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label> Chỉ số Điện </label>
+                            <input
+                                    type="text"
+                                    name="elecIndex"
+                                    th:number="*{elecIndex}"
+                                    class="form-control"
+                                    placeholder="Chỉ số hiện tại "
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-row" id="add_room"></div>
+                    <script>
+                    function water_by_unit(){
+                    let row2=document.getElementById("row2")
+                    let row1=document.getElementById("row1")
+                    if(row1!=null){
+                    row1.remove();
+                    }
+                    if(row2!=null){
+                    row2.remove();
+                    }
+                    html='<div class="form-row" id="row1">\
+                                  <div class="form-group col-md-6">\
+                                      <label> Đơn giá nước</label>\
+                                      <input\
+                                              type="text"\
+                                              name="waterUnit"\
+                                              th:field="${motel.motelWater}"\
+                                              class="form-control"\
+                                              placeholder="Nhập đơn giá nước"\
+                                      />\
+                                  </div>\
+                                  <div class="form-group col-md-3">\
+                                      <label> Chỉ số nước</label>\
+                                      <input\
+                                              type="text"\
+                                              name="waterIndex"\
+                                              th:field="*{waterIndex}"\
+                                              class="form-control"\
+                                              placeholder="Chỉ số hiện tại"\
+                                      />\
+                                  </div>\
+                              </div>'
+                    var form=document.getElementById('add_room')
+                    form.innerHTML+=html
+                    }
+                    function water_by_head(){
+                    let row2=document.getElementById("row2")
+                    let row1=document.getElementById("row1")
+                    if(row1!=null){
+                    row1.remove();
+                    }
+                    if(row2!=null){
+                    row2.remove();
+                    }
+                    html1='<div class="form-row" id="row2">\
+                                  <div class="form-group col-md-12">\
+                                      <label> Giá nước theo đầu người </label>\
+                                      <input\
+                                              type="text"\
+                                              name="waterUnit"\
+                                              class="form-control"\
+                                              placeholder="Nhập đơn giá nước"\
+                                      />\
+                                  </div>\
+                              </div>'
+                    var form1=document.getElementById('add_room')
+                    form1.innerHTML+=html1
+                    }</script>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Nước trong phòng
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <button class="dropdown-item" type="button" onclick="water_by_unit()">Theo chỉ số</button>
+                            <button class="dropdown-item" type="button" onclick="water_by_head()">Theo đầu người</button>
+                        </div>
+                    </div>
+
+<!--                    <div class="form-row">-->
+<!--                        <div class="form-group col-md-6">-->
+<!--                            <label> Đơn giá nước</label>-->
+<!--                            <input-->
+<!--                                    type="text"-->
+<!--                                    name="waterUnit"-->
+<!--                                    th:field="*{waterUnit}"-->
+<!--                                    class="form-control"-->
+<!--                                    placeholder="Nhập đơn giá nước"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                        <div class="form-group col-md-3">-->
+<!--                            <label> Chỉ số nước</label>-->
+<!--                            <input-->
+<!--                                    type="text"-->
+<!--                                    name="waterIndex"-->
+<!--                                    th:field="*{waterIndex}"-->
+<!--                                    class="form-control"-->
+<!--                                    placeholder="Chỉ số hiện tại"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Check me out
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background-image: linear-gradient(320deg, rgb(255, 85, 0), rgb(10, 22, 45) 40%);">Thêm phòng</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+</body>
+</html>

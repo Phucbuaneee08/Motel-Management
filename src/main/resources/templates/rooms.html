@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dashboard}">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+</head>
+<body>
+<div class = "container" layout:fragment="content">
+
+    <br/>
+    <div class ="row-h3">
+        <h3 style="font-size:50px"><b>QUẢN LÍ PHÒNG TRỌ</b></h3>
+    </div>
+    <div class ="row">
+        <div class ="col-lg-3">
+            <a class ="btn btn-primary btn-sm mb-3" data-toggle="modal"data-target="#exampleModal" style="background-color:#0a162d;font-size:18px;color:white;"><span> <i class="fas fa-plus icon"></i> Thêm phòng</span></a>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="border-color: rgb(10, 22, 45);
+    border-width: 3px;">
+                    <h5 class="modal-title" style="font-size: 30px;margin-left: auto;font-weight: 900;"><b>THÊM PHÒNG</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card" style="width:100%">
+                            <div class ="card-body">
+                                <form th:action="@{/rooms/add}"  method ="POST" >
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label >Tên phòng</label>
+                                            <input
+                                                    type="text"
+                                                    name="name"
+                                                    th:field="*{room2.name}"
+                                                    class="form-control"
+                                                    placeholder="Nhập tên phòng"
+                                            />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label >Giá phòng</label>
+                                            <input
+                                                    type="text"
+                                                    name="price"
+                                                    th:number="*{room2.price}"
+                                                    class="form-control"
+                                                    placeholder="Nhập giá phòng"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label> Mô tả</label>
+                                            <input
+                                                    type="text"
+                                                    name="description"
+                                                    th:field="*{room2.description}"
+                                                    class="form-control"
+                                                    placeholder="thêm mô tả"
+                                            />
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label> Diện tích </label>
+                                            <input
+                                                    type="text"
+                                                    name="square"
+                                                    th:number="*{room2.square}"
+                                                    class="form-control"
+                                                    placeholder="Diện tích phòng"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label> Đơn giá điện</label>
+                                            <input
+                                                    type="text"
+                                                    name="elecUnit"
+                                                    th:number="*{room2.elecUnit}"
+                                                    class="form-control"
+                                                    placeholder="Nhập đơn giá điện "
+                                            />
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label> Chỉ số Điện </label>
+                                            <input
+                                                    type="text"
+                                                    name="elecIndex"
+                                                    th:number="*{room2.elecIndex}"
+                                                    class="form-control"
+                                                    placeholder="Chỉ số hiện tại "
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row" id="add_room1"></div>
+                                    <script>
+                    function water_by_unit(){
+                    let row2=document.getElementById("row2")
+                    let row1=document.getElementById("row1")
+                    if(row1!=null){
+                    row1.remove();
+                    }
+                    if(row2!=null){
+                    row2.remove();
+                    }
+                    html='<div class="form-row" id="row1">\
+                                  <div class="form-group col-md-8">\
+                                      <label> Đơn giá nước</label>\
+                                      <input\
+                                              type="text"\
+                                              name="waterUnit"\
+                                              th:field="${motel.motelWater}"\
+                                              class="form-control"\
+                                              placeholder="Nhập đơn giá nước"\
+                                      />\
+                                  </div>\
+                                  <div class="form-group col-md-4">\
+                                      <label> Chỉ số nước</label>\
+                                      <input\
+                                              type="text"\
+                                              name="waterIndex"\
+                                              th:field="*{room2.waterIndex}"\
+                                              class="form-control"\
+                                              placeholder="Chỉ số hiện tại"\
+                                      />\
+                                  </div>\
+                              </div>'
+                    var form=document.getElementById('add_room1')
+                    form.innerHTML+=html
+                    }
+                    function water_by_head(){
+                    let row2=document.getElementById("row2")
+                    let row1=document.getElementById("row1")
+                    if(row1!=null){
+                    row1.remove();
+                    }
+                    if(row2!=null){
+                    row2.remove();
+                    }
+                    html1='<div class="form-row" id="row2">\
+                                  <div class="form-group col-md-12">\
+                                      <label> Giá nước theo đầu người </label>\
+                                      <input\
+                                              type="text"\
+                                              name="waterUnit"\
+                                              class="form-control"\
+                                              placeholder="Nhập đơn giá nước"\
+                                      />\
+                                  </div>\
+                              </div>'
+                    var form1=document.getElementById('add_room1')
+                    form1.innerHTML+=html1
+                    }</script>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" style="margin-left: 300px;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Nước trong phòng
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <button class="dropdown-item" type="button" onclick="water_by_unit()">Theo chỉ số</button>
+                                            <button class="dropdown-item" type="button" onclick="water_by_head()">Theo đầu người</button>
+                                        </div>
+                                    </div>
+
+                                    <!--                    <div class="form-row">-->
+                                    <!--                        <div class="form-group col-md-6">-->
+                                    <!--                            <label> Đơn giá nước</label>-->
+                                    <!--                            <input-->
+                                    <!--                                    type="text"-->
+                                    <!--                                    name="waterUnit"-->
+                                    <!--                                    th:field="*{waterUnit}"-->
+                                    <!--                                    class="form-control"-->
+                                    <!--                                    placeholder="Nhập đơn giá nước"-->
+                                    <!--                            />-->
+                                    <!--                        </div>-->
+                                    <!--                        <div class="form-group col-md-3">-->
+                                    <!--                            <label> Chỉ số nước</label>-->
+                                    <!--                            <input-->
+                                    <!--                                    type="text"-->
+                                    <!--                                    name="waterIndex"-->
+                                    <!--                                    th:field="*{waterIndex}"-->
+                                    <!--                                    class="form-control"-->
+                                    <!--                                    placeholder="Chỉ số hiện tại"-->
+                                    <!--                            />-->
+                                    <!--                        </div>-->
+                                    <!--                    </div>-->
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="gridCheck2">
+                                            <label class="form-check-label" for="gridCheck2">
+                                                Check me out
+                                            </label>
+                                        </div>
+                                    </div>
+
+
+                                    <button type="submit" class="btn btn-primary" style="background-image: linear-gradient(320deg, rgb(255, 85, 0), rgb(10, 22, 45) 40%);">Thêm phòng</button>
+
+                                </form>
+
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${param.success}">
+        <script th:inline="javascript">
+    // Show a success message if the form was successfully submitted
+    toastr.success('Thêm phòng thành công !', 'Success', {
+      closeButton: true,
+      progressBar: true,
+      positionClass: 'toast-top-right',
+      timeOut: 3000
+    });
+  </script>
+    </div>
+    <div th:if="${param.exist_contract}">
+        <script th:inline="javascript">
+    // Show a success message if the form was successfully submitted
+    toastr.warning('Phòng đã có hợp đồng !', 'Warning', {
+      closeButton: true,
+      progressBar: true,
+      positionClass: 'toast-top-right',
+      timeOut: 3000
+    });
+  </script>
+    </div>
+    <div th:if="${param.error_exist}">
+        <script th:inline="javascript">
+    // Show a success message if the form was successfully submitted
+    toastr.warning('Phòng đã tồn tại !', 'Warning', {
+      closeButton: true,
+      progressBar: true,
+      positionClass: 'toast-top-right',
+      timeOut: 3000
+    });
+  </script>
+    </div>
+    <div th:if="${param.success_contract}">
+        <script th:inline="javascript">
+    // Show a success message if the form was successfully submitted
+    toastr.success('Thêm hợp đồng thành công !', 'Success', {
+      closeButton: true,
+      progressBar: true,
+      positionClass: 'toast-top-right',
+      timeOut: 3000
+    });
+  </script>
+    </div>
+    <div th:if="${param.not_exist_contract}">
+        <script th:inline="javascript">
+    // Show a success message if the form was successfully submitted
+    toastr.error('Không tồn tại hợp đồng !', 'Error', {
+      closeButton: true,
+      progressBar: true,
+      positionClass: 'toast-top-right',
+      timeOut: 3000
+    });
+  </script>
+    </div>
+
+    <table class="table table-striped" style="font-size: 15px;">
+        <thead class="table-dark">
+        <tr style="white-space:nowrap;">
+            <th>Tên phòng </th>
+            <th>Giá phòng</th>
+            <th>Diện tích</th>
+            <th>Đơn giá điện</th>
+            <th>Chỉ số điện</th>
+            <th>Đơn giá nước</th>
+            <th>Chỉ số nước</th>
+            <th>Mô tả</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each = "room:${room}" th:style="${room.isRented}==1?'background-color:#6BCB77':'background-color:#FF6B6B'">
+            <td th:text="${room.name}"></td>
+            <td th:text="${#numbers.formatDecimal(room.price,0,'COMMA',0,'POINT')}+'VND'"></td>
+            <td th:text="${room.square}+'m²'"></td>
+            <td th:text="${room.elecUnit}"></td>
+            <td th:text="${room.elecIndex}"></td>
+            <td th:text="${room.waterUnit}"></td>
+            <td th:text="${room.waterIndex}"></td>
+            <td th:text="${room.description}"></td>
+            <td>
+                <div class="modal fade" th:id="*{'exampleModal2'+{room.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="border-color: rgb(10, 22, 45);
+    border-width: 3px;">
+                                <h5 class="modal-title" style="font-size: 30px;margin-left: auto;font-weight: 900;"><b>SỬA PHÒNG</b></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card"  style="width:100%">
+                                    <div class ="card-body">
+                                        <form th:action="@{/rooms/edit/{id}(id=${room.id})}" method ="POST">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label >Tên phòng</label>
+                                                    <input
+                                                            type="text"
+                                                            name="name"
+                                                            th:value="*{room.name}"
+                                                            class="form-control"
+                                                            placeholder="Nhập tên phòng"
+                                                    />
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label >Giá phòng</label>
+                                                    <input
+                                                            type="text"
+                                                            name="price"
+                                                            th:value="*{room.price}"
+                                                            class="form-control"
+                                                            placeholder="Nhập giá phòng"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label> Mô tả</label>
+                                                    <input
+                                                            type="text"
+                                                            name="description"
+                                                            th:value="*{room.description}"
+                                                            class="form-control"
+                                                            placeholder="thêm mô tả"
+                                                    />
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label> Diện tích </label>
+                                                    <input
+                                                            type="text"
+                                                            name="square"
+                                                            th:value="*{room.square}"
+                                                            class="form-control"
+                                                            placeholder="Diện tích phòng"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label> Đơn giá điện</label>
+                                                    <input
+                                                            type="text"
+                                                            name="elecUnit"
+                                                            th:value="*{room.elecUnit}"
+                                                            class="form-control"
+                                                            placeholder="Nhập đơn giá điện "
+                                                    />
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label> Chỉ số Điện </label>
+                                                    <input
+                                                            type="text"
+                                                            name="elecIndex"
+                                                            th:value="*{room.elecIndex}"
+                                                            class="form-control"
+                                                            placeholder="Chỉ số hiện tại "
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label> Đơn giá nước</label>
+                                                    <input
+                                                            type="text"
+                                                            name="waterUnit"
+                                                            th:value="*{room.waterUnit}"
+                                                            class="form-control"
+                                                            placeholder="Nhập đơn giá nước"
+                                                    />
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label> Chỉ số nước</label>
+                                                    <input
+                                                            type="text"
+                                                            name="waterIndex"
+                                                            th:value="*{room.waterIndex}"
+                                                            class="form-control"
+                                                            placeholder="Chỉ số hiện tại"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="gridCheck99">
+                                                    <label class="form-check-label" for="gridCheck">
+                                                        Check me out
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Xác nhận</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" th:id="*{'exampleModal3'+{room.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="border-color: rgb(10, 22, 45);
+    border-width: 3px;">
+                                <h1 class="modal-title" style="font-size: 30px;margin-left: auto;font-weight: 900;"><b>THÊM HỢP ĐỒNG</b></h1>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card" style="width:100%">
+                                    <div class ="card-body">
+                                        <form th:action="@{/rooms/contract/{id}(id=${room.id})}" th:object="${contract}" method ="POST">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label >Tên phòng</label>
+                                                    <input
+                                                            type="text"
+                                                            name="name"
+                                                            th:value="${room.name}"
+                                                            class="form-control"
+                                                            placeholder="Nhập tên phòng"
+                                                    />
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label >Giá phòng</label>
+                                                    <input
+                                                            type="text"
+                                                            name="price"
+                                                            th:value="${room.price}"
+                                                            class="form-control"
+                                                            placeholder="Nhập giá phòng"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label> Mô tả</label>
+                                                    <input
+                                                            type="text"
+                                                            name="description"
+                                                            th:value="${room.description}"
+                                                            class="form-control"
+                                                            placeholder="thêm mô tả"
+                                                    />
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label> Diện tích </label>
+                                                    <input
+                                                            type="text"
+                                                            name="square"
+                                                            th:value="${room.square}"
+                                                            class="form-control"
+                                                            placeholder="Diện tích phòng"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6" >
+                                                    <label> Ngày bắt đầu hợp đồng </label>
+                                                    <input
+                                                            placeholder="Select date"
+                                                            name="rentalDay"
+                                                            data-date-format="dd/mm/yyyy"
+                                                            th:field="${contract.rentalDay}"
+                                                            type="date"
+                                                            class="form-control">
+
+                                                </div>
+                                                <div class="form-group col-md-6" >
+                                                    <label> Ngày kết thúc hợp đồng </label>
+                                                    <input
+                                                            placeholder="Select date"
+                                                            type="date"
+                                                            data-date-format="dd/mm/yyyy"
+                                                            name="term"
+                                                            th:field="${contract.term}"
+                                                            class="form-control">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label> Tiền cọc  </label>
+                                                    <input
+                                                            type="text"
+                                                            name="deposit"
+                                                            class="form-control"
+                                                            th:field="${contract.deposit}"
+                                                            placeholder="Nhập tiền cọc"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label> Thêm người thuê  </label>
+                                                    <button type="button" onclick="add_renter()"><i class="fa fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="form-row" id="add_renter"><div class="form-row" id="row11">
+                                                <div class="form-group col-md-6">
+                                                    <label> Tên người thuê </label>
+                                                    <input
+                                                    type="text"
+                                                    name="renterName"
+                                                    th:field="${renter.renterName}"
+                                                    class="form-control"
+                                                    placeholder="Nhập tên người thuê"
+                                                    />
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <label> Nghề nghiệp</label>
+                                                    <input
+                                                    type="text"
+                                                    name="job"
+                                                    th:field="${renter.job}"
+                                                    class="form-control"
+                                                    placeholder="Nghề nghiệp hiên tại"
+                                                    />
+                                                </div>
+                                            </div>
+                                                <div class="form-row" >
+                                                    <div class="form-group col-md-6">
+                                                        <label> Số căn cước công dân </label>
+                                                        <input
+                                                        type="text"
+                                                        name="identification"
+                                                        th:field="${renter.identification}"
+                                                        class="form-control"
+                                                        placeholder="Nhập số căn cước"
+                                                        />
+                                                    </div>
+                                                    <div class="form-group col-md-5">
+                                                        <label> Số điện thoại</label>
+                                                        <input
+                                                        type="text"
+                                                        name="phoneNumber"
+                                                        th:field="${renter.phoneNumber}"
+                                                        class="form-control"
+                                                        placeholder="Nhập số điện thoại"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="form-row" >
+                                                    <div class="form-group col-md-12">
+                                                        <label> Địa chỉ thường trú </label>
+                                                        <input
+                                                        type="text"
+                                                        name="residence"
+                                                        th:field="${renter.residence}"
+                                                        class="form-control"
+                                                        placeholder="Nhập địa chỉ thường trú"
+                                                        />
+                                                    </div>
+                                                </div></div>
+
+                                            <div class="form-group">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                                                    <label class="form-check-label" for="gridCheck">
+                                                        Check me out
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" style="background-image: linear-gradient(320deg, rgb(255, 85, 0), rgb(10, 22, 45) 40%);">Xác nhận</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" th:id="*{'exampleModalCenter'+{room.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle2">Xóa phòng</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc muốn xóa phòng này chứ ?
+                            </div>
+                            <div class="modal-footer">
+                                <span>
+                                    <a class ="btn btn-secondary btn-sm mb-3" data-dismiss="modal" ><span> <i class="fas fa-trash icon"></i> Close</span></a>
+                                <a class ="btn btn-danger btn-sm mb-3" th:href="@{rooms/{id}(id=${room.id})}" ><span> <i class="fas fa-trash icon"></i> Xóa phòng</span></a>
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" th:id="*{'exampleModal4'+{room.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Xóa hợp đồng</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc muốn xóa hợp đồng này chứ ? Việc làm trên đồng thời sẽ xóa tất cả thành viên trong phòng !
+                            </div>
+                            <div class="modal-footer">
+                                <span>
+                                    <a class ="btn btn-secondary btn-sm mb-3" data-dismiss="modal" ><span> <i class="fas fa-trash icon"></i> Close</span></a>
+                                <a class ="btn btn-danger btn-sm mb-3" th:href="@{rooms/view-contract/delete/{id}(id=${room.id})}" ><span> <i class="fas fa-trash icon"></i> Xóa hợp đồng</span></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </button>
+                <div class="dropdown-menu hidden-arrow" aria-labelledby="dropdownMenuButton">
+                    <!-- Button trigger modal -->
+                    <!-- Modal -->
+                    <a class="dropdown-item" data-toggle="modal" th:attr="data-target='#exampleModal2'+*{room.id}">Sửa</a>
+                    <a class="dropdown-item" data-toggle="modal" th:attr="data-target='#exampleModalCenter'+*{room.id}" >Xóa phòng</a>
+                    <a class="dropdown-item" data-toggle="modal" th:attr="data-target='#exampleModal3'+*{room.id}">Thêm hợp đồng</a>
+                    <a class="dropdown-item" th:href="@{rooms/view-contract/{id}(id=${room.id})}">Xem hợp đồng</a>
+                    <a class="dropdown-item" data-toggle="modal"  th:attr="data-target='#exampleModal4'+*{room.id}" th:href="@{rooms/view-contract/delete/{id}(id=${room.id})}">Xóa hợp đồng</a>
+                </div>
+            </div></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+</body>
+</html>

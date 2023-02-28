@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dashboard}">
+<head>
+
+</head>
+<body>
+<br/>
+<br/>
+<br/>
+<div class = "container" layout:fragment="content">
+    <div class = "row">
+        <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1><b>XEM HỢP ĐỒNG</b> </h1>
+            <div class ="card-body">
+                <form th:action="@{/rooms/view-contract/{id}(id=${room.id})}" th:object="${contract}" method ="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label >Tên phòng</label>
+                            <input
+                                    type="text"
+                                    name="name"
+                                    th:field="${room.name}"
+                                    class="form-control"
+                                    placeholder="Nhập tên phòng"
+                            />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label >Giá phòng</label>
+                            <input
+                                    type="text"
+                                    name="price"
+                                    th:field="${room.price}"
+                                    class="form-control"
+                                    placeholder="Nhập giá phòng"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label> Mô tả</label>
+                            <input
+                                    type="text"
+                                    name="description"
+                                    th:field="${room.description}"
+                                    class="form-control"
+                                    placeholder="thêm mô tả"
+                            />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label> Diện tích </label>
+                            <input
+                                    type="text"
+                                    name="square"
+                                    th:field="${room.square}"
+                                    class="form-control"
+                                    placeholder="Diện tích phòng"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6" >
+                            <label> Ngày bắt đầu hợp đồng </label>
+                            <input
+                                    placeholder="Select date"
+                                    name="rentalDay"
+                                    data-date-format="dd/mm/yyyy"
+                                    th:field="${contract.rentalDay}"
+                                    type="date"
+                                    class="form-control">
+
+                        </div>
+                        <div class="form-group col-md-6" >
+                            <label> Ngày kết thúc hợp đồng </label>
+                            <input
+                                    placeholder="Select date"
+                                    type="date"
+                                    data-date-format="dd/mm/yyyy"
+                                    name="term"
+                                    th:field="${contract.term}"
+                                    class="form-control">
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label> Tiền cọc  </label>
+                            <input
+                                    type="text"
+                                    name="deposit"
+                                    class="form-control"
+                                    th:field="${contract.deposit}"
+                                    placeholder="Nhập tiền cọc"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-row" >
+                                  <div class="form-group col-md-6">
+                                      <label> Tên người thuê </label>
+                                      <input
+                                              type="text"
+                                              name="renterName"
+                                              th:field="${renter.renterName}"
+                                              class="form-control"
+                                              placeholder="Nhập tên người thuê"
+                                      />
+                                  </div>
+                                  <div class="form-group col-md-5">
+                                      <label> Nghề nghiệp</label>
+                                      <input
+                                              type="text"
+                                              name="job"
+                                              th:field="${renter.job}"
+                                              class="form-control"
+                                              placeholder="Nghề nghiệp hiên tại"
+                                      />
+                                  </div>
+                              </div>
+                    <div class="form-row" >
+                        <div class="form-group col-md-6">
+                            <label> Số căn cước công dân </label>
+                            <input
+                                              type="text"
+                                              name="identification"
+                                              th:field="${renter.identification}"
+                                              class="form-control"
+                                              placeholder="Nhập số căn cước"
+                            />
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label> Số điện thoại</label>
+                            <input
+                                              type="text"
+                                              name="phoneNumber"
+                                              th:field="${renter.phoneNumber}"
+                                              class="form-control"
+                                              placeholder="Nhập số điện thoại"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-row" >
+                        <div class="form-group col-md-12">
+                            <label> Địa chỉ thường trú </label>
+                            <input
+                                              type="text"
+                                              name="residence"
+                                              th:field="${renter.residence}"
+                                              class="form-control"
+                                              placeholder="Nhập địa chỉ thường trú"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Check me out
+                            </label>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dashboard}">
+<head>
+</head>
+<body>
+<div class = "container" layout:fragment="content">
+
+  <br/>
+  <div class="row-h3">
+    <h3 style="font-size:50px"><b>Lịch sử thanh toán</b></h3>
+  </div>
+  <div class ="row">
+  </div>
+
+  <table class="table table-striped" style="font-size: 20px;">
+    <thead class="table-dark">
+    <tr>
+      <th>Tên phòng </th>
+      <th>Ngày nộp</th>
+      <th>Tổng tiền</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each = "payment:${payment}">
+      <td th:text="${payment.room.name}"></td>
+      <td th:text="${#dates.format(payment.payDate,'dd/MM/yyyy')}"></td>
+      <td th:text="'+'+${#numbers.formatDecimal(payment.totalPayment,0,'COMMA',0,'POINT')}+'VND'"></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+</body>
+</html>

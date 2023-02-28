@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Motel Management Application</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/h3.css}" rel="stylesheet">
+
+    <link rel="stylesheet"
+          th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css}"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <link rel="icon" th:href="@{img/mdb-favicon.ico}" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
+    <link rel="stylesheet" th:href="@{/css/mdb.min.css}" />
+
+</head>
+<body style="background-image:url('/img/OIP.jfif'); background-size:100%; background-repeat:no-repeat; background-attachment:fixed; font-family:Times New Roman, Times, serif; ">
+<div th:replace="navbar::navbar"></div>
+
+<section layout:fragment="content" >
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="img/slide1.jpg" alt="First slide">
+            </div>
+        </div>
+    </div>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        #wrapper{
+            max-width:1170px;
+            margin:0 auto;
+        }
+        .headline{
+            text-align:center;
+            margin:40px 0px;
+        }
+        h3{
+            font-size:35px;
+            padding:10px 20px;
+            text-transform:uppercase;
+            display:inline-block;
+            font-weight:600;
+            border: 5px solid;
+        border-image-slice: 1;
+        border-width: 5px;
+        border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+        }
+        ul.rooms{
+            list-style:none;
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:space-between;
+
+        }
+        ul.rooms li{
+            flex-basis:50%;
+            padding-left:15px;
+            padding-right:15px;
+            box-sizing:border-box;
+            margin-bottom:30px;
+        }
+         ul.rooms li img{
+            max-width:100%;
+            height:auto;
+        }
+        ul.rooms li:hover a.xem-phong{
+            bottom:0px;
+
+        }
+        ul.rooms li .room-top{
+            position:relative;
+            overflow:hidden;
+
+        }
+        ul.rooms li .room-top .room-thumb{
+            display:block;
+        }
+        ul.rooms li .room-top .room-thumb img{
+            display:block;
+        }
+        ul.rooms li .room-top a.xem-phong{
+            text-transform : uppercase;
+            text-decoration: none;
+            text-align:center;
+            display:block;
+            background-color:#0a162d;
+            color:#fff;
+            padding:10px 0px;
+            position:absolute;
+
+            width:100%;
+            transition:0.25s ease-in-out;
+        }
+         ul.rooms li .room-info {
+            padding: 10px 0px;
+        }
+
+        ul.rooms li .room-info a{
+            display:block;
+            text-decoration:none;
+        }
+        ul.rooms li .room-info a.room-square{
+            font-size:18px;
+            color:#9e9e9e;
+            padding: 3px 0px;
+
+        }
+        ul.rooms li .room-info a.room-name{
+            color:#334862;
+            padding : 3px 0px;
+            font-size:25px;
+            font-weight:600;
+
+        }
+        ul.rooms li .room-info .room-price{
+            color:#111;
+            padding:2px 0px;
+            font-weight:600;
+            font-size:20px;
+        }
+    </style>
+    <div id="wrapper">
+        <div class="headline">
+            <h3>DANH SÁCH PHÒNG</h3>
+            <br/> <br/>
+            <ul class="rooms" >
+                <li th:each="room:${room}">
+                    <div class="room-item">
+                        <div class="room-top">
+                            <a th:href="@{/rooms/view/{id}(id=${room.id})}"
+                               .class="room-thumb">
+                                <img th:src="@{/img/R.jfif}" alt="" class="">
+                            </a>
+                            <a th:href="@{/rooms/view/{id}(id=${room.id})}" class="xem-phong">Xem phòng</a>
+                        </div>
+                        <div class="room-info">
+                            <a href="" class="room-square" th:text="${room.square}+'m²'"></a>
+                            <a href="" class="room-name" th:text="'PHÒNG '+${room.name}"></a>
+                            <div class="room-price" id="amount" th:text="${#numbers.formatDecimal(room.price,0,'COMMA',0,'POINT')}+'VND'">0 đồng</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section layout:fragment="content2"></section>
+
+<script type="text/javascript" th:src="@{/js/mdb.min.js}"></script>
+<!-- Custom scripts -->
+<script type="text/javascript"></script>
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+<script src="https://cdnjs.com/libraries/popper.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

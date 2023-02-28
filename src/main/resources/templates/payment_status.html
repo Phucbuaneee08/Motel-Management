@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dashboard}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+</head>
+<body layout:fragment="content">
+<br/>
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img alt="Bootstrap Image Preview" width="735px" height="500px" th:src="@{/img/sl2.jpg}">
+                        </div>
+                    </div>
+                    <div class="carousel slide" id="carousel-510969">
+
+
+                    </div>
+                    <div class="page-header" style="text-align:center; background-color:rgba(10,22,45,255); " width="700px">
+                        <h2 style="font-weight:700; color:whitesmoke; margin: 2rem;
+    padding: 0.1rem;">
+                            <p th:text="'PHÒNG '+${room.name}" style="margin-top: 0.5rem;
+    margin-bottom: 0.5rem;"></p>
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-md-6" style="font-size:25px">
+                    <dl>
+                        <dt style="background-color:#8FA5A8; text-align:center;">
+                            CHI TIẾT THANH TOÁN
+                        </dt>
+                        <dd >
+                            Cần thường xuyên cập nhật trạng thái của phòng để đạt được hiệu suất quản lý cao nhất
+                        </dd>
+                        <dt>
+                            Giá phòng
+                        </dt>
+                        <dd>
+                            <p th:text="${#numbers.formatDecimal(room.price,0,'COMMA',0,'POINT')}+'VND'"></p>
+                        </dd>
+                        <form th:action="@{/payments/status/{id}(id=${room.id})}"  method ="POST">
+                            <div class="form-row">
+                                <div class="form-group col-md-6" style="background-color:#0a162d">
+                                    <label style="color: whitesmoke;font-size: 25px;font-weight: 400;margin:0px;"><b> Chỉ số điện cũ</b></label>
+                                    <input
+                                            style="color:whitesmoke; background-color:transparent;font-size:20px;font-weight:600;"
+                                            placeholder="Chỉ số điện cũ"
+                                            name="newElecIndex"
+                                            th:field="${room.elecIndex}"
+                                            type="text"
+                                            class="form-control" readonly>
+                                </div>
+                                <div class="form-group col-md-6" style="background-color:#ff5500">
+                                    <label style="font-size:25px; font-weight:400;margin:0px;"><b> Chỉ số nước cũ</b></label>
+                                    <input
+                                            style="color:whitesmoke; background-color:transparent; border-color: transparent; font-size:20px;font-weight:600;"
+                                            placeholder="Chỉ số nước cũ"
+                                            name="newElecIndex"
+                                            th:field="${room.waterIndex}"
+                                            type="text"
+                                            class="form-control" readonly>
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6" >
+                                    <label for="newElecIndex" style="font-size:25px; font-weight:400;"><b> Nhập chỉ số điện mới</b></label>
+                                    <input
+                                            placeholder="Chỉ số điện hiện tại"
+                                            name="newElecIndex"
+                                            th:number="${room.newElecIndex}"
+                                            type="number"
+                                            id="newElecIndex"
+                                            class="form-control"
+                                            required>
+
+
+                                </div>
+                                <div class="form-group col-md-6" >
+                                    <label for="newWaterIndex" style="font-size:25px; font-weight:400;"><b> Nhập chỉ số nước mới</b></label>
+                                    <input
+                                            placeholder="Chỉ số nước hiện tại"
+                                            type="number"
+                                            id="newWaterIndex"
+                                            name="newWaterIndex"
+                                            th:number="${room.newWaterIndex}"
+                                            class="form-control"
+                                            required>
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6" >
+                                    <label style="font-size:25px; font-weight:400;"><b> Tổng tiền </b></label>
+                                    <input
+                                            placeholder="Tổng tiền phòng"
+                                            name="newElecIndex"
+                                            th:field="${room.totalPayment}"
+                                            type="text"
+                                            class="form-control"
+                                            readonly
+                                            id="total">
+
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="background-color:#0a162d;margin-left: 300px;
+    margin-top: 35px;">Thanh toán</button>
+
+
+                        </form>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/scripts.js}"></script>
+</body>
+</html>

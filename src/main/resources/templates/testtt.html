@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+</head>
+<body>
+<!-- Button trigger modal -->
+<button id="show-toast">Show Toast</button>
+<script>
+    // Gán sự kiện click cho nút "Show Toast"
+    $('#show-toast').click(function() {
+      // Hiển thị thông báo thành công
+      toastr.success('Lưu thành công!', 'Thông báo', {
+        closeButton: true,
+        progressBar: true,
+        positionClass: 'toast-top-right',
+        timeOut: 3000
+      });
+    });
+  </script>
+<!-- Modal -->
+
+
+<!-- Modal -->
+</body>
+</html>

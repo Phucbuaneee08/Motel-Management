@@ -1,6 +1,6 @@
 package com.example.MotelManagement.service.impl;
 
-import com.example.MotelManagement.entity.Student;
+import com.example.MotelManagement.entities.Student;
 import com.example.MotelManagement.repository.StudentRepository;
 import com.example.MotelManagement.service.StudentService;
 import org.springframework.stereotype.Service;
@@ -16,11 +16,13 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> getAllStudents() {
+
         return studentRepository.findAll();
     }
 
     @Override
     public Student saveStudent(Student student) {
+
         return studentRepository.save(student);
     }
 }

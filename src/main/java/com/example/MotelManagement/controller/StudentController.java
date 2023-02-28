@@ -1,6 +1,6 @@
 package com.example.MotelManagement.controller;
 
-import com.example.MotelManagement.entity.Student;
+import com.example.MotelManagement.entities.Student;
 import com.example.MotelManagement.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping()
 //youaresohandsome
 public class StudentController {
+
     @Autowired
     private StudentService studentService;
 
@@ -35,4 +36,5 @@ public class StudentController {
         studentService.saveStudent(student);
         return "redirect:/students";
     }
+
 }

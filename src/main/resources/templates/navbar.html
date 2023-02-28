@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light"  th:fragment="navbar" style="background: linear-gradient(to right, rgba(10,22,45,255), rgba(10,22,45,255));font-family:Times New Roman, Times, serif;">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Toggle button -->
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="true"
+                aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                <img
+                        th:src="@{/img/logoo.png}"
+                        height="50"
+                        alt="MDB Logo"
+                        loading="lazy"
+                />
+            </a>
+            <style>
+            .navbar-light .navbar-toggler {
+                 color: ghostwhite;
+                    border-color: rgba(0,0,0,.1);
+                }
+                .navbar-light .navbar-nav .nav-link {
+                    color: ghostwhite;
+                   }
+            </style>
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-size:20px">
+                <li class="nav-item " >
+                    <a class="nav-link" th:href="@{/dashboard}">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/rooms}">Quản lý phòng trọ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/renters}">Danh sách người thuê</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/payments}">Quản lý thanh toán</a>
+                </li>
+            </ul>
+            <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+
+            <!-- Avatar -->
+            <div class="dropdown">
+                <a
+                        class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                        href="#"
+                        id="navbarDropdownMenuAvatar"
+                        role="button"
+                        data-mdb-toggle="dropdown"
+                        aria-expanded="true"
+                >
+                    <img
+                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                            class="rounded-circle"
+                            height="40"
+                            alt="Black and White Portrait of a Man"
+                            loading="lazy"
+                    />
+                </a>
+                <ul
+                        class="dropdown-menu dropdown-menu-left"
+                        aria-labelledby="navbarDropdownMenuAvatar"
+                        style="left:0";
+                >
+                    <li>
+                        <a class="dropdown-item" th:href="@{/my-motel}">Thông tin phòng trọ</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+</body>
+</html>
